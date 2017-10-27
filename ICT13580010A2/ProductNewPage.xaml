@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage
+	xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	x:Class="ICT13580010A2.ProductNewPage"
+    Title="New Product">
+
+    <StackLayout
+        Margin="20">
+
+        <Label 
+            TextColor="Blue"
+            FontSize="22"
+            FontAttributes="Bold"
+            HorizontalTextAlignment="Center"
+            Text="New Product"/>
+
+        <Label
+            TextColor="Teal"
+            Margin="0,20,0,0"
+            Text="Product Name"/>
+
+        <Entry  
+            Placeholder="Product's Name"
+            Keyboard="Text"
+            x:Name="nameEntry"/>
+
+        <Label
+            TextColor="Teal"
+            Text="Description"/>
+
+        <Editor 
+            Keyboard="Text"
+            HeightRequest="100"
+            x:Name="descriptionEditor"
+            BackgroundColor="Silver"/>
+
+        <Label
+            TextColor="Teal"
+            Text="Category"/>
+
+        <Picker 
+            x:Name="categoryPicker"/>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackLayout
+                Grid.Column="0">
+
+                <Label
+                    TextColor="Teal"
+                    Text="Product Price"/>
+
+                <Entry
+                    x:Name="pPriceEntry"
+                    Keyboard="Numeric"/>
+                
+            </StackLayout>
+           
+           <StackLayout
+                Grid.Column="1">
+
+                <Label
+                    TextColor="Teal"
+                    Text="Sell Price"/>
+
+                <Entry
+                    x:Name="sPriceEntry"
+                    Keyboard="Numeric"/>
+                
+            </StackLayout>
+
+        </Grid>
+
+        <Label
+            TextColor="Teal"
+            Text="Stock"/>
+
+        <Entry
+            x:Name="stockEntry"
+            Keyboard="Numeric"/>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button
+                x:Name="cancelButton"
+                Text="Cancel"
+                Grid.Column="0"/>
+
+            <Button
+                x:Name="saveButton"
+                Text="Submit"
+                Grid.Column="1"/>
+
+        </Grid>
+
+        
+
+    </StackLayout>
+        
+    
+</ContentPage>
