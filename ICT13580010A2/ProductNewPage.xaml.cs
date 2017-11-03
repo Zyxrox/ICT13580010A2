@@ -7,9 +7,15 @@ namespace ICT13580010A2
 {
     public partial class ProductNewPage : ContentPage
     {
-        public ProductNewPage()
+        Product product;
+
+        public ProductNewPage(Product product=null)
         {
             InitializeComponent();
+
+            this.product = product;
+
+            titleLabel.Text = product == null ? "New Product" : "Edit Product";
 
             saveButton.Clicked += SaveButton_Clicked;
             cancelButton.Clicked += CancelButton_Clicked;
@@ -17,6 +23,16 @@ namespace ICT13580010A2
             categoryPicker.Items.Add("Shirts");
             categoryPicker.Items.Add("Shorts");
             categoryPicker.Items.Add("Socks");
+
+            if (product != null)
+            {
+                nameEntry.Text = product.Name;
+                descriptionEditor.Text = product.Description;
+                categoryPicker.SelectedItem = product.Category;
+                pPriceEntry.Text = product.ProductPrice.ToString();
+                sPriceEntry.Text = product.SellPrize.ToString();
+                stockEntry.Text = product.Stock.ToString();
+            }
 
         }
 
@@ -26,16 +42,40 @@ namespace ICT13580010A2
 
             if (isOk)
             {
-                var product = new Product();
-                product.Name = nameEntry.Text;
-                product.Description = descriptionEditor.Text;
-                product.Category = categoryPicker.SelectedItem.ToString();
-                product.ProductPrice = decimal.Parse(pPriceEntry.Text);
-                product.SellPrize = decimal.Parse(sPriceEntry.Text);
-                product.Stock = int.Parse(stockEntry.Text);
-                var id = App.DbHelper.AddProduct(product);
-                await DisplayAlert("Product is saved", "The Product Id is #" + id, "Done");
+                if (product == null)
+                {
+                    product = new Product();
 
+                    product.Name = nameEntry.Text;
+                    product.Description = descriptionEditor.Text;
+                    product.Category = categoryPicker.SelectedItem.ToString();
+                    product.ProductPrice = decimal.Parse(pPriceEntry.Text);
+                    product.SellPrize = decimal.Parse(sPriceEntry.Text);
+                    product.Stock = int.Parse(stockEntry.Text);
+
+                    var id = App.DbHelper.AddProduct(product);
+
+                    await DisplayAlert("Product is saved", "The Product Id is #" + id, "Done");
+                }
+
+                else
+                {
+                    product.Name = nameEntry.Text;
+                    product.Description = descriptionEditor.Text;
+                    product.Category = categoryPicker.SelectedItem.ToString();
+                    product.ProductPrice = decimal.Parse(pPriceEntry.Text);
+                    product.SellPrize = decimal.Parse(sPriceEntry.Text);
+                    product.Stock = int.Parse(stockEntry.Text);
+
+                    var id = App.DbHelper.UpdateProduct(product);
+
+                    await DisplayAlert("Product edit is completed", "The Product Id is #" + id, "Done");
+                }
+
+
+
+
+                await Navigation.PopModalAsync();
             }
 
 
@@ -43,7 +83,7 @@ namespace ICT13580010A2
 
         void CancelButton_Clicked(object sender, EventArgs e)
         {
-
+            Navigation.PopModalAsync();
         }
     }
 }

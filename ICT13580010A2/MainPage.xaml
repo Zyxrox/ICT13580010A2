@@ -12,5 +12,70 @@
             x:Name="newButton"/>
         
     </ContentPage.ToolbarItems>
+
+    <ListView
+        x:Name="productListView"
+        RowHeight="100">
+
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+
+                    <ViewCell.ContextActions>
+                        <MenuItem
+                            Text="Edit"
+                            CommandParameter="{Binding .}"
+                            Clicked="Edit_Clicked"/>
+
+                        <MenuItem
+                            Text="Delete"
+                            CommandParameter="{Binding .}"
+                            IsDestructive="true"
+                            Clicked="Delete_Clicked"/>
+                    </ViewCell.ContextActions>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="50"/>
+                        </Grid.ColumnDefinitions>
+                    
+
+                        <Image
+                            BackgroundColor="Silver"
+                            HeightRequest="100"
+                            Source="product.png"/>
+
+                        <StackLayout
+                            Grid.Column="1">
+
+                            <Label
+                                Text="{Binding Name}"
+                                FontAttributes="Bold"
+                                TextColor="Green"/>
+
+                            <Label
+                                Text="{Binding Description}"
+                                LineBreakMode="TailTruncation"/>
+
+                            <Label
+                                Text="{Binding SellPrize, StringFormat='Sell Price {0:N0} Baht'}"/>
+
+                            <Label
+                                Text="{Binding Stock, StringFormat='Inventory: {0}'}"/>
+                            
+                        </StackLayout>
+
+                        <Button
+                            Text="Buy"
+                            Grid.Column="2"/>
+
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+
+    </ListView>
     
 </ContentPage>

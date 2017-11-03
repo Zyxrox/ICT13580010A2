@@ -7,9 +7,16 @@ namespace ICT13580010A2
     {
         public static DbHelper DbHelper { get; set; }
 
+        public App()
+        {
+            InitializeComponent();
+        }
+
         public App(string dbPath)
         {
             InitializeComponent();
+
+            DbHelper = new DbHelper(dbPath);
 
             MainPage = new NavigationPage(new MainPage());
         }

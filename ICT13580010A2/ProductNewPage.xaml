@@ -9,6 +9,7 @@
         Margin="20">
 
         <Label 
+            x:Name="titleLabel"
             TextColor="Blue"
             FontSize="22"
             FontAttributes="Bold"
